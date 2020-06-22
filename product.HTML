@@ -1,0 +1,529 @@
+﻿<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>人生苦短，腰要保暖</title>
+	<audio  src="./bg1.mp3" autoplay="autoplay" id="audio" ></audio>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" viewport-fit=cover>
+<meta content=”telephone=no” name=”format-detection” />
+
+    <script>
+        window.onload = function () {
+            //需求：无缝滚动。
+            //思路：赋值第一张图片放到ul的最后，然后当图片切换到第五张的时候
+            //     直接切换第六章，再次从第一张切换到第二张的时候先瞬间切换到
+            //     第一张图片，然后滑动到第二张
+            //步骤：
+            //1.获取事件源及相关元素。（老三步）
+            //2.复制第一张图片所在的li,添加到ul的最后面。
+            //3.给ol中添加li，ul中的个数-1个，并点亮第一个按钮。
+            //4.鼠标放到ol的li上切换图片
+            //5.添加定时器
+            //6.左右切换图片（鼠标放上去隐藏，移开显示）
+            var screen = document.getElementById("screen");
+            var ul = screen.children[0];
+            var ol = screen.children[1];
+            var div = screen.children[2];
+            var imgWidth = screen.offsetWidth;
+
+            //2
+            var tempLi = ul.children[0].cloneNode(true);
+            ul.appendChild(tempLi);
+            //3
+            for(var i = 0; i < ul.children.length - 1; i++) {
+                var newOlLi = document.createElement("li");
+                newOlLi.innerHTML = i + 1;
+                ol.appendChild(newOlLi);
+            }
+            var olLiArr = ol.children;
+            olLiArr[0].className = "current";
+            //4
+            for(var i = 0, len = olLiArr.length; i < len; i++) {
+                olLiArr[i].index = i;
+                olLiArr[i].onmouseover = function (ev) {
+                    for(var j = 0; j < len; j++) {
+                        olLiArr[j].className = "";
+                    }
+                    this.className = "current";
+                    key = square = this.index;
+                    animate(ul, -this.index * imgWidth);
+                }
+            }
+            //5
+            var key = 0;
+            var square = 0;
+            var timer = setInterval(autoPlay, 1000);
+            screen.onmouseover = function (ev) {
+                clearInterval(timer);
+                div.style.display = "block";
+            }
+            screen.onmouseout = function (ev) {
+                timer = setInterval(autoPlay, 1000);
+                div.style.display = "block";
+            }
+            //6
+            var divArr = div.children;
+            divArr[0].onclick = function (ev) {
+                key--;
+                if(key < 0) {
+                    ul.style.left = -(ul.children.length-1) * imgWidth + "px";
+                    key = 4;
+                }
+                animate(ul, -key * imgWidth);
+                square--;
+                if(square < 0) {
+                    square = 4;
+                }
+                for(var k = 0; k < len; k++) {
+                    olLiArr[k].className = "";
+                }
+                <!-- olLiArr[square].className = "current"; -->
+            }
+            divArr[1].onclick = autoPlay;
+            function autoPlay() {
+                key++;
+                //当不满足下面的条件是时候，轮播图到了最后一个孩子，进入条件中后，瞬移到
+                //第一张，继续滚动。
+                if(key > ul.children.length - 1) {
+                    ul.style.left = 0;
+                    key = 1;
+                }
+                animate(ul, -key * imgWidth);
+                square++;
+                if(square > 4) {
+                    square = 0;
+                }
+                for(var k = 0; k < len; k++) {
+                    olLiArr[k].className = "";
+                }
+                olLiArr[square].className = "current";
+            }
+
+            function animate(ele,target){
+    clearInterval(ele.timer);
+    var speed = target>ele.offsetLeft?10:-10;
+    ele.timer = setInterval(function () {
+        var val = target - ele.offsetLeft;
+        ele.style.left = ele.offsetLeft + speed + "px";
+        if(Math.abs(val)<Math.abs(speed)){
+            ele.style.left = target + "px";
+            clearInterval(ele.timer);
+        }
+    },10)
+}
+function animateY(ele, target) {
+    //bug2 能够返回
+    clearInterval(ele.timer);
+    var speed = target > ele.offsetTop ? 10 : -10;
+
+    ele.timer = setInterval(function () {
+        var val = target - ele.offsetTop;
+        ele.style.top = ele.offsetTop + speed + "px";
+        if(Math.abs(val) <= 10) {
+            ele.style.top = target + "px";
+            clearInterval(timer);
+        }
+    }, 20)
+}
+
+            function animate(ele,target){
+                    clearInterval(ele.timer);
+                    var speed = target>ele.offsetLeft?10:-10;
+                    ele.timer = setInterval(function () {
+                        var val = target - ele.offsetLeft;
+                        ele.style.left = ele.offsetLeft + speed + "px";
+                        if(Math.abs(val)<Math.abs(speed)){
+                            ele.style.left = target + "px";
+                            clearInterval(ele.timer);
+                        }
+                    },10)  
+            }
+
+        }
+    </script>
+    <script type="text/javascript">
+    	document.addEventListener('WeixinJSBridgeReady',function(){
+	document.getElementById('audio').play()
+})
+    </script>
+	
+	
+	
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
+  <script>
+    wx.config({
+      appId: '<?php echo $wxconfig['appId'];?>',
+      timestamp: '<?php echo $wxconfig['timestamp'];?>',
+      nonceStr: '<?php echo $wxconfig['nonceStr'];?>',
+      signature: '<?php echo $wxconfig['signature'];?>',
+      jsApiList: [
+        
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'openLocation',
+        'updateAppMessageShareData'
+  
+      ]
+    });
+
+    wx.ready(function() {
+      
+      var shareTitle = '女神节来了，“倒春寒”靠边站吧';
+      var shareDesc = '不要过妇女节，因为我们都是女王';
+      var shareLink = 'http://pangtouyutech.com/H5';
+      var shareImg = 'http://pangtouyutech.com/H5/share.png';
+
+      wx.updateAppMessageShareData({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg,
+        success: function () {
+          // 设置成功
+        }
+      });
+      
+      
+      // 分享给朋友事件绑定
+      wx.onMenuShareAppMessage({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到朋友圈
+      wx.onMenuShareTimeline({
+        title: shareTitle,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到QQ
+      wx.onMenuShareQQ({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到微博
+      wx.onMenuShareWeibo({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+    });
+  </script>
+	
+	
+  <style type="text/css">
+
+    html {
+		
+		height:100%;
+    	width:100%;
+  
+		}
+		body {
+		
+		margin:0;
+		padding:0;
+		width:100%;
+    	height:100%;
+    	background:url(images/bg.png) no-repeat center center;
+    	background-size:cover;
+    	background-attachment: fixed;
+    	
+		}
+		.layer {
+		width:100%;
+		height:400px;
+	}
+
+        *{ padding:0; margin:0; list-style:none; border:0;}
+
+        .all{
+            width:280px;
+            height:357px;
+            padding:6px;
+            border:0px solid #ccc;
+            margin: 175px auto;
+            position:relative;
+        }
+        .screen{
+            width:280px;
+            height:357px;
+            overflow:hidden;
+            position:relative;
+        }
+
+        .screen li{ width:280px; height:357px; overflow:hidden; float:left;}
+        .screen ul{ position:absolute; left:0; top:0px; width:3000px;}
+		
+        .all ol{ width:0px;position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center;}
+        .all ol li{ float:left; width:0px; height:20px; background:#fff; border:1px solid #ccc; margin-left:10px; cursor:pointer;}
+        .all ol li.current{ background:pink;}
+
+        #arr {display: block;}
+        #arr span{ width:40px; height:40px; position:absolute; left:5px; top:50%; margin-top:-20px; background:#000; cursor:pointer; line-height:40px; text-align:center; font-weight:bold; font-family:'黑体'; font-size:30px; color:#fff; opacity:0.3; border:1px solid #fff;}
+        #arr #right{right:5px; left:auto;}
+
+
+        .P4-1{
+
+			width:320px;
+			height:73px;
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:7%;
+			top:10%;
+		
+		}
+          .hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 160px ;
+			margin-left: 160px ;
+		}
+
+
+/*兼容与适配*/
+@media (device-height:736px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6/7/8 plus */
+.P4-1{
+
+			width:320px;
+			height:73px;
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:11%;
+			top:10%;
+		
+		}
+		}
+		
+		/*兼容与适配*/
+@media (device-height:732px) and (-webkit-min-device-pixel-ratio:2){
+.P4-1{
+			width:320px;
+			height:73px;
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:11%;
+			top:10%;
+		
+		}
+		}
+
+@media (device-height:812px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphoneX */
+
+
+.P4-1{
+
+			width:320px;
+			height:73px;
+			
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:7%;
+			top:10%;
+		
+		}
+		}
+
+@media (device-height:640px) and (-webkit-min-device-pixel-ratio:2){/* 兼容Galaxy S5 */
+.P4-1{
+
+			width:320px;
+			height:73px;
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:6%;
+			top:10%;
+		
+		}
+		}
+		@media (device-height:715px) and (-webkit-min-device-pixel-ratio:2){
+.P4-1{
+
+			width:306px;
+			height:65px;
+			background:url(images/P4-1.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:2%;
+			top:10%;
+		
+		}
+		}
+
+		
+		
+			/*兼容与适配*/
+@media (device-width:360px) and (-webkit-min-device-pixel-ratio:2){
+
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+
+}
+@media (device-width:375px) and (-webkit-min-device-pixel-ratio:2){
+
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+
+}
+
+
+
+
+@media (device-width:384px) and (-webkit-min-device-pixel-ratio:2){
+
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+}
+
+@media (device-width:412px) and (-webkit-min-device-pixel-ratio:2){
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+
+}
+
+@media (device-width:411px) and (-webkit-min-device-pixel-ratio:2){
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+
+}
+
+@media (device-width:414px) and (-webkit-min-device-pixel-ratio:2){
+.hua{
+			width:200px;
+			height:200px;
+			background:url(images/hua.png) no-repeat;
+			position:absolute;
+			background-size:100% 100%;
+			left:0%;
+			top:50%;
+			margin-top: 200px ;
+			margin-left: 160px ;
+		}
+
+}
+
+
+
+
+
+    </style>
+</head>
+
+  
+
+
+<body>
+<div class="layer">
+<div class="all" id='all'>
+    <div class="screen" id="screen">
+        <ul id="ul">        
+            <li>
+			<a href="https://item.jd.com/22707055030.html">
+            <img src="images/p1.png" width="280" height="357" />
+			</a>
+            </li>
+             <li>
+			<a href="https://item.m.jd.com/product/10686379629.html">
+            <img src="images/p2.png" width="280" height="357" />
+			</a>
+            </li>
+			  <li>
+			<a href="https://item.jd.com/10724010923.html">
+            <img src="images/p3.png" width="280" height="357" />
+			</a>
+            </li>
+			  <li>
+			<a href="https://item.m.jd.com/product/10678388833.html">
+            <img src="images/p4.png" width="280" height="357" />
+			</a>
+            </li>
+		
+        </ul>
+        <ol>
+
+        </ol>
+        <div id="arr">
+            <span id="left"><</span>
+            <span id="right">></span>
+        </div>
+    </div>
+</div>
+ <div class="P4-1"></div>
+ <div class="hua"></div>
+
+
+</body>
+</html>
