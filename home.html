@@ -5,7 +5,11 @@
 	<title>送给最美的你</title>
 	<audio  src="./bg1.mp3" autoplay="autoplay" id="audio" ></audio>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" viewport-fit=cover>
+<<<<<<< HEAD
 	 <meta content=”telephone=no” name=”format-detection” />
+=======
+<meta content=”telephone=no” name=”format-detection” />
+>>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<style type="text/css" media="screen">
@@ -24,6 +28,10 @@
     	background:url(images1/2.png) no-repeat center center;
     	background-size:cover;
     	background-attachment: fixed;
+<<<<<<< HEAD
+=======
+    	
+>>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 		}
 		.heka {
 		
@@ -50,6 +58,11 @@
 	    margin-top:-53px;
 	    animation: fadeInDown 1s linear 1;
 	    -webkit-animation: fadeInDown 1s linear 1;
+<<<<<<< HEAD
+=======
+	   
+	    
+>>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 		}
 		.logo {
 
@@ -391,14 +404,97 @@
 		
 	</div>
 </body>
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js">
+>>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 
  </script> 
 <script type="text/javascript" language="javascript">
 	
 	setTimeout("javascript:location.href='product.html'",3500 )
+<<<<<<< HEAD
 	document.getElementById('audio').play()
 </script>
 
+=======
+	document.addEventListener('WeixinJSBridgeReady',function(){
+	document.getElementById('audio').play()
+})
+</script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
+  <script>
+    wx.config({
+      appId: '<?php echo $wxconfig['appId'];?>',
+      timestamp: '<?php echo $wxconfig['timestamp'];?>',
+      nonceStr: '<?php echo $wxconfig['nonceStr'];?>',
+      signature: '<?php echo $wxconfig['signature'];?>',
+      jsApiList: [
+        
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'openLocation',
+        'updateAppMessageShareData'
+  
+      ]
+    });
+
+    wx.ready(function() {
+      
+      var shareTitle = '女神节来了，“倒春寒”靠边站吧';
+      var shareDesc = '不要过妇女节，因为我们都是女王';
+      var shareLink = 'http://pangtouyutech.com/H5';
+      var shareImg = 'http://pangtouyutech.com/H5/share.png';
+
+      wx.updateAppMessageShareData({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg,
+        success: function () {
+          // 设置成功
+        }
+      });
+      
+      
+      // 分享给朋友事件绑定
+      wx.onMenuShareAppMessage({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到朋友圈
+      wx.onMenuShareTimeline({
+        title: shareTitle,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到QQ
+      wx.onMenuShareQQ({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+
+      // 分享到微博
+      wx.onMenuShareWeibo({
+        title: shareTitle,
+        desc: shareDesc,
+        link: shareLink,
+        imgUrl: shareImg
+      });
+    });
+  </script>
+
+>>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 
 </html>
