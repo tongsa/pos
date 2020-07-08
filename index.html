@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <meta charset="utf-8">
-
 <html>
 <head>
 	<title>不要过妇女节，因为我们都是女神!</title>
@@ -377,82 +376,6 @@
 </div>
 
 
-<<<<<<< HEAD
-=======
-
-<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-
-  <script>
-    wx.config({
-      appId: '<?php echo $wxconfig['appId'];?>',
-      timestamp: '<?php echo $wxconfig['timestamp'];?>',
-      nonceStr: '<?php echo $wxconfig['nonceStr'];?>',
-      signature: '<?php echo $wxconfig['signature'];?>',
-      jsApiList: [
-        
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-        'openLocation',
-        'updateAppMessageShareData'
-  
-      ]
-    });
-
-    wx.ready(function() {
-      
-      var shareTitle = '女神节来了，“倒春寒”靠边站吧';
-      var shareDesc = '不要过妇女节，因为我们都是女神';
-      var shareLink = 'http://pangtouyutech.com/H5';
-      var shareImg = 'http://pangtouyutech.com/H5/share.png';
-
-      wx.updateAppMessageShareData({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg,
-        success: function () {
-          // 设置成功
-        }
-      });
-      
-      
-      // 分享给朋友事件绑定
-      wx.onMenuShareAppMessage({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到朋友圈
-      wx.onMenuShareTimeline({
-        title: shareTitle,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到QQ
-      wx.onMenuShareQQ({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到微博
-      wx.onMenuShareWeibo({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-    });
-  </script>
-
-
->>>>>>> 3e0e746fd355e29e4fa5844322f1879f8fe3762a
 </body>
  <script type="text/javascript">
 

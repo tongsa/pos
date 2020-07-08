@@ -1,5 +1,4 @@
 ﻿<!doctype html>
-
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -11,17 +10,6 @@
 
     <script>
         window.onload = function () {
-            //需求：无缝滚动。
-            //思路：赋值第一张图片放到ul的最后，然后当图片切换到第五张的时候
-            //     直接切换第六章，再次从第一张切换到第二张的时候先瞬间切换到
-            //     第一张图片，然后滑动到第二张
-            //步骤：
-            //1.获取事件源及相关元素。（老三步）
-            //2.复制第一张图片所在的li,添加到ul的最后面。
-            //3.给ol中添加li，ul中的个数-1个，并点亮第一个按钮。
-            //4.鼠标放到ol的li上切换图片
-            //5.添加定时器
-            //6.左右切换图片（鼠标放上去隐藏，移开显示）
             var screen = document.getElementById("screen");
             var ul = screen.children[0];
             var ol = screen.children[1];
@@ -143,86 +131,8 @@ function animateY(ele, target) {
 
         }
     </script>
-    <script type="text/javascript">
-    	document.addEventListener('WeixinJSBridgeReady',function(){
-	document.getElementById('audio').play()
-})
-    </script>
-	
-	
-	
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 
-  <script>
-    wx.config({
-      appId: '<?php echo $wxconfig['appId'];?>',
-      timestamp: '<?php echo $wxconfig['timestamp'];?>',
-      nonceStr: '<?php echo $wxconfig['nonceStr'];?>',
-      signature: '<?php echo $wxconfig['signature'];?>',
-      jsApiList: [
-        
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-        'openLocation',
-        'updateAppMessageShareData'
-  
-      ]
-    });
 
-    wx.ready(function() {
-      
-      var shareTitle = '女神节来了，“倒春寒”靠边站吧';
-      var shareDesc = '不要过妇女节，因为我们都是女王';
-      var shareLink = 'http://pangtouyutech.com/H5';
-      var shareImg = 'http://pangtouyutech.com/H5/share.png';
-
-      wx.updateAppMessageShareData({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg,
-        success: function () {
-          // 设置成功
-        }
-      });
-      
-      
-      // 分享给朋友事件绑定
-      wx.onMenuShareAppMessage({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到朋友圈
-      wx.onMenuShareTimeline({
-        title: shareTitle,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到QQ
-      wx.onMenuShareQQ({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-
-      // 分享到微博
-      wx.onMenuShareWeibo({
-        title: shareTitle,
-        desc: shareDesc,
-        link: shareLink,
-        imgUrl: shareImg
-      });
-    });
-  </script>
-	
-	
   <style type="text/css">
 
     html {
