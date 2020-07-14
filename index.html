@@ -1,5 +1,75 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>快餐店收银系统</title><link rel=stylesheet href=http://at.alicdn.com/t/font_1939215_4w9v0nn27bx.css><style>html,body,#app{
-    		height: 100%;
-    		padding: 0px;
-    		margin: 0px;
-    	}</style><link href=./static/css/app.9c77756d941a7c424f1a0529d52ea121.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.da0e23d469fe218a1a6a.js></script><script type=text/javascript src=./static/js/app.9edbd45735c548fd1c16.js></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="css/base.css">
+
+</head>
+
+<body>
+
+<!-- 导航栏开始 -->
+<div class="nav">
+  <div class="left">
+    <ul class="layui-nav layui-bg-cyan">
+      <li class="layui-nav-item"><a href="timeline.html">时间线</a>
+      </li>
+      <li class="layui-nav-item layui-this"><a href="">轮播图</a></li>
+      <li class="layui-nav-item"><a href="date.html">日期与时间选择</a></li>
+      <li class="layui-nav-item"><a href="mianban.html">面板</a></li>
+      <li class="layui-nav-item"><a href="">大数据</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">移动模块</a></dd>
+          <dd><a href="">后台模版</a></dd>
+          <dd><a href="">电商平台</a></dd>
+        </dl>
+      </li>
+
+      <li class="layui-nav-item"><a href="">社区</a></li>
+    </ul>
+  </div>
+</div>
+<!-- 导航栏结束 -->
+
+<!-- 轮播图开始 -->
+<div class="middle">
+  <div class="center">
+     <div class="layui-carousel" id="test10">
+        <div carousel-item="">
+          <div><img src="images/layui/1.png"></div>
+          <div><img src="images/layui/2.png"></div>
+          <div><img src="images/layui/3.png"></div>
+          <div><img src="images/layui/4.png"></div>
+          <div><img src="images/layui/5.png"></div>
+          <div><img src="images/layui/6.png"></div>
+          <div><img src="images/layui/7.png"></div>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- 轮播图结束 -->
+      
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="js/layui/lunbo.js" charset="utf-8"></script>
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+  <script>
+     layui.use('element', function(){
+      var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+      
+      //监听导航点击
+      element.on('nav(demo)', function(elem){
+        //console.log(elem)
+        layer.msg(elem.text());
+      });
+    }); 
+  </script>
+</body>
+</html>
